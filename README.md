@@ -32,7 +32,7 @@ Los documentos generados se guardarán en la carpeta especificada.
 
 ## Configuración
 
-Edita el archivo `config.py` para configurar las rutas y nombres de archivo:
+Edita el archivo `automa.py` para configurar las rutas y nombres de archivo:
 
 - `excel_file`: Ruta del archivo Excel con los datos.
 - `template_path`: Ruta de la plantilla de Word (.docx).
