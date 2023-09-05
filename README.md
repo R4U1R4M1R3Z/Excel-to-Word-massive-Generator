@@ -9,26 +9,36 @@ Este script automatiza el proceso de generación de documentos Word a partir de 
 ## Requisitos
 
 - Python 3.x instalado
-- Bibliotecas: `pandas`, `python-docx`
+- Bibliotecas: `pandas`, `docxtpl`
 
 Puedes instalar las bibliotecas requeridas usando el siguiente comando:
 
 ```bash
 pip install -r requirements.txt
 ```
+## Cómo Funciona el Script
 
-## Uso
+1. Cargar el archivo Excel: El script carga un archivo Excel que contiene los datos a utilizar para rellenar la plantilla de Word. Debes asegurarte de que el archivo Excel tenga las columnas necesarias (FURGON, CHASIS, EQUIPO_FRIO, NUM_SERIE) con los datos correspondientes.
 
-1. Coloca tus datos en un archivo Excel en el formato deseado.
-2. Crea una plantilla de Word (.docx) con marcadores que deseas reemplazar, por ejemplo, `variable`.
-3. Modifica el archivo `config.py` con las rutas y nombres de archivo correspondientes.
-4. Ejecuta el script:
+2. Definir las Rutas de la Plantilla(**template_path**) y la Carpeta de Salida(**output_folder**): Debes especificar la ubicación de la plantilla de Word y la carpeta donde se guardarán los documentos generados. Asegúrate de que estas rutas sean correctas y accesibles.
 
-```bash
-python automa.py
-```
+3. Iterar a Través de los Registros en el DataFrame: El script itera a través de cada fila en el archivo Excel y obtiene los valores de las columnas en mi ejemplo(FURGON, CHASIS, EQUIPO_FRIO, NUM_SERIE) para cada registro.
 
-Los documentos generados se guardarán en la carpeta especificada.
+4. Cargar la Plantilla de Word: Utiliza la biblioteca docxtpl para cargar la plantilla de Word como una plantilla que se puede llenar con datos.
+
+5. Definir el Diccionario de Contexto: Crea un diccionario llamado **context** donde las claves son los nombres de las variables en la plantilla de Word y los valores son los datos que se insertarán en lugar de esas variables.
+
+6. Renderizar la Plantilla: Utiliza doc.render(context) para reemplazar las variables en la plantilla de Word con los datos del diccionario de contexto.
+
+7. Guardar el Documento Generado: El documento Word generado se guarda con un nombre de archivo único en la carpeta de salida.
+
+10. Abrir la Carpeta con los Archivos Generados: Finalmente, el script utiliza os.system para abrir la carpeta que contiene los documentos generados.
+
+### Cómo Poner las Variables en la Plantilla
+
+Para insertar variables en la plantilla de Word que el script pueda reemplazar, debes seguir este formato:
+
+En la plantilla de Word, encierra el nombre de la variable entre llaves dobles {{}}. Por ejemplo: {{FURGON}}, {{CHASIS}}, {{EQUIPO_FRIO}}, {{NUM_SERIE}}.
 
 ## Configuración
 
